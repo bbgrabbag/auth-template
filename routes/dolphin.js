@@ -1,8 +1,14 @@
 const express = require("express");
+const expressJwt = require("express-jwt");
 
 const DolphinModel = require("../models/dolphin");
+const config = require("../config");
 
 const dolphinRoute = express.Router();
+
+const authorize = expressJwt({secret: config.secret})
+
+dolphinRoute.use(authorize);
 
 dolphinRoute.route("/")
     .get((req, res) => {
