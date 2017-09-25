@@ -12,7 +12,7 @@
 
 ***TO USE***
 
-- cd into exercises folder
-- git clone https://github.com/bbgrabbag/auth-template
-- npm install
-- nodemon index.js
+- `cd` into exercises folder
+- `git clone https://github.com/bbgrabbag/auth-template`
+- `npm install`
+- `nodemon index.js`
