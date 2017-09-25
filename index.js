@@ -7,8 +7,7 @@ const morgan = require("morgan");
 const config = require("./config");
 const dolphinRoute = require("./routes/dolphin");
 
-const PORT = process.env.PORT || 8080;
-
+const PORT = config.PORT;
 const app = express();
 
 app.use(cors());
@@ -17,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/dolphin", dolphinRoute);
+//profile and auth routes go here
 
 mongoose.connect(config.db, () => {
     console.log("CONNECTED ON " + config.db);
