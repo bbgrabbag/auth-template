@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import LoginComponent from "./LoginComponent";
-
+import DolphinFormComponent from "./DolphinFormComponent";
 import { connect } from "react-redux";
-import { login } from "../../../redux/actions/index";
+import { addDolphin } from "../../../../redux/actions/index";
 
-class LoginContainer extends Component {
+class DolphinFormContainer extends Component {
     constructor() {
         super();
         this.state = {
             inputs: {
-                username: "",
-                password: ""
+                name: "",
+                type: "",
+                age: ""
             }
         }
     }
@@ -28,19 +28,20 @@ class LoginContainer extends Component {
     clearInputs() {
         this.setState({
             inputs: {
-                username: "",
-                password: ""
+                name: "",
+                type: "",
+                age: ""
             }
         })
     }
     handleSubmit(e) {
         e.preventDefault();
-        this.props.login(this.state.inputs);
+        this.props.addDolphin(this.state.inputs)
         this.clearInputs();
     }
     render() {
         return (
-            <LoginComponent
+            <DolphinFormComponent
                 handleChange={this.handleChange.bind(this)}
                 handleSubmit={this.handleSubmit.bind(this)}
                 {...this.state.inputs} />
@@ -48,4 +49,10 @@ class LoginContainer extends Component {
     }
 }
 
-export default connect(null, { login })(LoginContainer);
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps, { addDolphin })(DolphinFormContainer);
+
+

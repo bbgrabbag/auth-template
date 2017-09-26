@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DolphinItemComponent from "./dolphin/DolphinItemComponent";
+import DolphinFormContainer from "./form/DolphinFormContainer";
 
 export default class DolphinListComponent extends Component {
     genList() {
@@ -12,9 +13,12 @@ export default class DolphinListComponent extends Component {
     }
     render() {
         return (
-            <div>
+            <div >
                 <h2>My Dolphins</h2>
-                {this.genList()}
+                <DolphinFormContainer />
+                <div className="dolphins-wrapper">
+                    {this.genList()}
+                </div>
             </div>
         )
     }
