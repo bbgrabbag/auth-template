@@ -12,7 +12,7 @@ dolphinRoute.use(authorize);
 
 dolphinRoute.route("/")
     .get((req, res) => {
-        DolphinModel.find(req.query, (err, dolphins) => {
+        DolphinModel.find({owner: req.user._id}, (err, dolphins) => {
             if (err) {
                 res.status(500).send(err);
             } else {
@@ -22,6 +22,7 @@ dolphinRoute.route("/")
     })
     .post((req, res) => {
         let newDolphin = new DolphinModel(req.body);
+        newDolphin.owner = req.user._id;
         newDolphin.save((err, dolphin) => {
             if (err) {
                 res.status(500).send(err);

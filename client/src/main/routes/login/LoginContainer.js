@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LoginComponent from "./LoginComponent";
+import {Redirect} from "react-router-dom";
 
 import { connect } from "react-redux";
 import { login } from "../../../redux/actions/index";
@@ -40,12 +41,19 @@ class LoginContainer extends Component {
     }
     render() {
         return (
-            <LoginComponent
-                handleChange={this.handleChange.bind(this)}
-                handleSubmit={this.handleSubmit.bind(this)}
-                {...this.state.inputs} />
+            this.props.isAuthenticated ?
+                <Redirect to="/profile" /> :
+                <LoginComponent
+                    handleChange={this.handleChange.bind(this)}
+                    handleSubmit={this.handleSubmit.bind(this)}
+                    authError={this.props.authError}
+                    {...this.state.inputs} />
         )
     }
 }
 
-export default connect(null, { login })(LoginContainer);
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps, { login })(LoginContainer);

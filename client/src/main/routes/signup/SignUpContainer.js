@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import SignupComponent from "./SignUpComponent";
+import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { signup } from "../../../redux/actions/index";
 
 class SignupContainer extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -42,12 +44,18 @@ class SignupContainer extends Component {
     }
     render() {
         return (
-            <SignupComponent
-                handleChange={this.handleChange.bind(this)}
-                handleSubmit={this.handleSubmit.bind(this)}
-                {...this.state.inputs} />
+            this.props.isAuthenticated ?
+                <Redirect to="/profile" /> :
+                <SignupComponent
+                    handleChange={this.handleChange.bind(this)}
+                    handleSubmit={this.handleSubmit.bind(this)}
+                    authError={this.props.authError}
+                    {...this.state.inputs} />
         )
     }
 }
+const mapStateToProps = (state) => {
+    return state;
+}
 
-export default connect(null, { signup })(SignupContainer);
+export default connect(mapStateToProps, { signup })(SignupContainer);

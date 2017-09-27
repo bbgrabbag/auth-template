@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import SignUpContainer from "./routes/signup/SignUpContainer";
 import LoginContainer from "./routes/login/LoginContainer";
 import ProfileComponent from "./routes/profile/ProfileComponent";
 import DolphinListContainer from "./routes/dolphins/DolphinListContainer";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
-export default class App extends Component {
+import { connect } from "react-redux";
+import { verifyToken } from "../redux/actions/index";
+
+class App extends Component {
+    componentWillMount(){
+        this.props.verifyToken();
+    }
     render() {
         return (
             <div className="app-wrapper">
@@ -15,10 +22,13 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path="/" component={SignUpContainer} />
                     <Route path="/login" component={LoginContainer} />
-                    <Route path="/profile" component={ProfileComponent} />
-                    <Route path="/dolphins" component = {DolphinListContainer}/>
+                    <ProtectedRoute path="/profile" component={ProfileComponent} />
+                    <ProtectedRoute path="/dolphins" component={DolphinListContainer} />
                 </Switch>
             </div>
         )
     }
 }
+
+
+export default withRouter(connect(null, { verifyToken })(App));

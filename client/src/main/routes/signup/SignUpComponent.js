@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 export default class SignupComponent extends Component {
     render() {
         return (
+            
             <div className="form-wrapper">
                 <form onSubmit={this.props.handleSubmit}>
                     <h3>Sign Up</h3>
@@ -10,6 +11,7 @@ export default class SignupComponent extends Component {
                     <input onChange={this.props.handleChange}value={this.props.email}name="email"type="email"placeholder="Email"/>
                     <input onChange={this.props.handleChange}value={this.props.password}name="password"type="password"placeholder="#"/>
                     <button type="submit">Create Account</button>
+                    <p>{this.props.authError.signup}</p>
                 </form>
             </div>
         )

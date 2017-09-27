@@ -27,6 +27,9 @@
     padding: 30px;
     text-align: center;
 }
+form p {
+    color: firebrick;
+}
 
 h1,
 h2,
@@ -48,6 +51,6 @@ p {
 
 .dolphin-wrapper {
     background-color: goldenrod;
-    margin: 5px;
+    margin: 5px;;
     padding: 3px;
 }

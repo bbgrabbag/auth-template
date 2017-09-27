@@ -48,8 +48,9 @@ authRoute.route("/signup")
                             });
                         } else {
                             res.status(201).send({
+                                user: user.withoutPwd(),
                                 success: true,
-                                token: jwt.sign(user.withoutPwd(), config.secret, {expiresIn: 30 * 60})
+                                token: jwt.sign(user.withoutPwd(), config.secret, { expiresIn: 30 * 60 })
                             })
                         }
                     })
@@ -60,21 +61,22 @@ authRoute.route("/signup")
 
 authRoute.post("/login", passport.authenticate("local", { session: false }), (req, res) => {
     UserModel.findOne({ username: req.body.username }, (err, user) => {
-        if(err){
+        if (err) {
             console.error(err);
             res.status(500).send({
                 success: false,
                 err
             });
-        } else if(user === null){
+        } else if (user === null) {
             res.status(404).send({
                 success: false,
                 err: "That user does not exist"
             })
         } else {
             res.status(200).send({
+                user: user.withoutPwd(),
                 success: true,
-                token: jwt.sign(user.withoutPwd(), config.secret, {expiresIn: 30 * 60})
+                token: jwt.sign(user.withoutPwd(), config.secret, { expiresIn: 30 * 60 })
             })
         }
     })

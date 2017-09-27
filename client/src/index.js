@@ -11,5 +11,8 @@ import mainReducer from "./redux/reducers/index";
 
 import App from "./main/App";
 let store = createStore(mainReducer, applyMiddleware(thunk));
+store.subscribe(()=>{
+    console.log(store.getState());
+})
 
 ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById("root"));

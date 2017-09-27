@@ -5,7 +5,7 @@ import { loadDolphins } from "../../../redux/actions/index";
 
 class DolphinListContainer extends Component {
     componentDidMount() {
-        this.props.loadDolphins();
+        this.props.loadDolphins(this.props.user._id);
     }
     render() {
         return (
